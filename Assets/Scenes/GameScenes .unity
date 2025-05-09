@@ -1099,7 +1099,11 @@ SpriteRenderer:
   m_Size: {x: 15, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 1
+=======
+  m_WasSpriteAssigned: 0
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &477210267
@@ -2053,8 +2057,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC124\uC815"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2187,8 +2196,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB9C8\uC2A4\uD130 \uBCFC\uB968"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2321,8 +2335,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBC30\uACBD\uC74C\uC545"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3660,8 +3679,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB098\uAC00\uAE30"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4225,8 +4249,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB2E4\uC2DC\uD558\uAE30"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4454,8 +4483,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uD654\uBA74 "
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4580,8 +4614,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uACC4\uC18D\uD558\uAE30"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4868,8 +4907,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uD6A8\uACFC\uC74C"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5917,8 +5961,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB098\uAC00\uAE30"
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6249,10 +6298,17 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
+<<<<<<< HEAD
   m_Size: {x: 1.64, y: 2.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+=======
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2057389852
@@ -6416,8 +6472,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC801\uC6A9 "
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+  m_sharedMaterial: {fileID: -5686626107824046272, guid: f2683fe99095e44eb8b7d7dc2973c013, type: 2}
+>>>>>>> parent of 166ca42 (Merge branch 'YDH_Branch')
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
