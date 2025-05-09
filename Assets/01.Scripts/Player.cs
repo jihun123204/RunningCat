@@ -24,33 +24,45 @@ public class Player : MonoBehaviour
     private Vector3 originalSpritePosition;
     private Vector3 slideSpriteOffset = new Vector3(0, -0.1f, 0);
 
-   void Start()
-{
-    // ✅ 자식 스프라이트 오브젝트 가져오기
-    spriteTransform = transform.Find("Model");  // 자식 이름에 맞게 수정
-    if (spriteTransform != null)
+    // 플레이어 체력 및 초당 틱뎀
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public int healthDrainRate = 10;      //      초당 ?씩 체력 까이는 코드
+    private float healthTimer = 0f;
+
+    public bool Die = false;
+
+    void Start()
     {
-        animator = spriteTransform.GetComponent<Animator>(); // 자식에서 Animator 가져오기
-        originalSpritePosition = spriteTransform.localPosition;
+        // ✅ 자식 스프라이트 오브젝트 가져오기
+        spriteTransform = transform.Find("Model");  // 자식 이름에 맞게 수정
+        if (spriteTransform != null)
+        {
+            animator = spriteTransform.GetComponent<Animator>(); // 자식에서 Animator 가져오기
+            originalSpritePosition = spriteTransform.localPosition;
+        }
+        else
+        {
+            Debug.LogWarning("❗ 'Model' 자식 오브젝트를 찾을 수 없습니다. 이름이 정확한지 확인하세요.");
+        }
+
+        rb2d = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+
+        if (CompareTag("Player"))
+            isPlayer = true;
+
+        // 콜라이더 정보 저장
+        originalColliderSize = boxCollider.size;
+        originalColliderOffset = boxCollider.offset;
+
+        slideColliderSize = new Vector2(originalColliderSize.x, originalColliderSize.y * 0.5f);
+        slideColliderOffset = new Vector2(originalColliderOffset.x, originalColliderOffset.y - originalColliderSize.y * 0.25f);
+
+        // 현재 체력에 최대 체력값으로 초기화
+        currentHealth = maxHealth;
     }
-    else
-    {
-        Debug.LogWarning("❗ 'Model' 자식 오브젝트를 찾을 수 없습니다. 이름이 정확한지 확인하세요.");
-    }
-
-    rb2d = GetComponent<Rigidbody2D>();
-    boxCollider = GetComponent<BoxCollider2D>();
-
-    if (CompareTag("Player"))
-        isPlayer = true;
-
-    // 콜라이더 정보 저장
-    originalColliderSize = boxCollider.size;
-    originalColliderOffset = boxCollider.offset;
-
-    slideColliderSize = new Vector2(originalColliderSize.x, originalColliderSize.y * 0.5f);
-    slideColliderOffset = new Vector2(originalColliderOffset.x, originalColliderOffset.y - originalColliderSize.y * 0.25f);
-}
 
 
     void Update()
@@ -60,6 +72,8 @@ public class Player : MonoBehaviour
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         // 슬라이드 시작
+        if (Die == true) return;
+
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) 
             && stateInfo.IsName("Run"))
         {
@@ -89,6 +103,8 @@ public class Player : MonoBehaviour
         }
 
         // 점프
+        if (Die == true) return;
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             animator.ResetTrigger("Slide");
@@ -118,9 +134,28 @@ public class Player : MonoBehaviour
         {
             animator.speed = 0f;
         }
+
+        // 틱뎀 로직, 사망 로직
+        if (Die == true) return;
+
+        healthTimer += Time.deltaTime;
+        if (healthTimer >= 1f)
+        {
+            currentHealth -= (int)healthDrainRate;
+            healthTimer = 0f;
+
+            Debug.Log($"현재 체력: {currentHealth}");
+
+            if (currentHealth <= 0)
+            {
+                Dead();
+            }
+        }
     }
     public void FixedUpdate()
     {
+        if (Die == true)
+            return;
 
         Vector3 velocity = rb2d.velocity;     //      가속도
         velocity.x = forwardSpeed;      //       똑같은 속도
@@ -138,5 +173,14 @@ public class Player : MonoBehaviour
             animator.speed = 1f;
             animator.Play("Run");
         }
+    }
+
+    // 게임 오버 처리
+    void Dead()
+    {
+        Debug.Log("체력 없음");
+        animator.SetBool("Dead", true);
+        Die = true;
+        //  이제 이곳에 캐릭터 사망시 GameOver UI 등을 넣으시면 됩니다
     }
 }
