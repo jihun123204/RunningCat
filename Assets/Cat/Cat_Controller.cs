@@ -93,7 +93,7 @@ public class CatController : MonoBehaviour
             animator.ResetTrigger("Slide");
             animator.SetTrigger("Jump");
 
-            rb2d.linearVelocity = new Vector2(rb2d.linearVelocity.x, 0f);
+            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             transform.position += new Vector3(0, jumpHeightOffset, 0);
 
