@@ -7,8 +7,9 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private bool isPlayer = false;
     private bool isSliding = false;
-
-    public float forwardSpeed = 3f;     //      앞으로 나가는 힘
+    
+    // 플레이어 이동 관련 기준 값
+    public float forwardSpeed = 3f;
     public float jumpForce = 7f;
     public float jumpHeightOffset = 0.5f;
     private bool isGrounded = true;
