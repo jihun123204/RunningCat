@@ -5,6 +5,7 @@ Properties {
 	_FaceUVSpeedX		("Face UV Speed X", Range(-5, 5)) = 0.0
 	_FaceUVSpeedY		("Face UV Speed Y", Range(-5, 5)) = 0.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[HDR]_FaceColor		("Fill Color", Color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
@@ -14,6 +15,12 @@ Properties {
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
 	_OutlineColor	    ("Outline Color", Color) = (0,0,0,1)
+>>>>>>> main
+=======
+	[HDR]_FaceColor		("Fill Color", Color) = (1,1,1,1)
+	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
+
+	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
 >>>>>>> main
 	_OutlineTex			("Outline Texture", 2D) = "white" {}
 	_OutlineUVSpeedX	("Outline UV Speed X", Range(-5, 5)) = 0.0
@@ -36,18 +43,26 @@ Properties {
 	_Cube 					("Reflection Cubemap", Cube) = "black" { /* TexGen CubeReflect */ }
 	_EnvMatrixRotation  	("Texture Rotation", vector) = (0, 0, 0, 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[HDR]_SpecColor		    ("Specular Color", Color) = (0,0,0,1)
 =======
 	_SpecColor		        ("Specular Color", Color) = (0,0,0,1)
+>>>>>>> main
+=======
+	[HDR]_SpecColor		    ("Specular Color", Color) = (0,0,0,1)
 >>>>>>> main
 
 	_FaceShininess		("Face Shininess", Range(0,1)) = 0
 	_OutlineShininess	("Outline Shininess", Range(0,1)) = 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[HDR]_GlowColor		("Color", Color) = (0, 1, 0, 0.5)
 =======
 	_GlowColor		    ("Color", Color) = (0, 1, 0, 0.5)
+>>>>>>> main
+=======
+	[HDR]_GlowColor		("Color", Color) = (0, 1, 0, 0.5)
 >>>>>>> main
 	_GlowOffset			("Offset", Range(-1,1)) = 0
 	_GlowInner			("Inner", Range(0,1)) = 0.05
@@ -134,10 +149,14 @@ SubShader {
 		#include "UnityCG.cginc"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct v2f {
 =======
 		struct v2f
 		{
+>>>>>>> main
+=======
+		struct v2f {
 >>>>>>> main
 			V2F_SHADOW_CASTER;
 			float2	uv			: TEXCOORD1;

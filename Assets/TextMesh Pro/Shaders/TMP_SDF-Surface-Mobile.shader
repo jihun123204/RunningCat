@@ -8,6 +8,7 @@ Shader "TextMeshPro/Mobile/Distance Field (Surface)" {
 Properties {
 	_FaceTex			("Fill Texture", 2D) = "white" {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[HDR]_FaceColor		("Fill Color", Color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
@@ -18,14 +19,24 @@ Properties {
 
 	_OutlineColor	    ("Outline Color", Color) = (0,0,0,1)
 >>>>>>> main
+=======
+	[HDR]_FaceColor		("Fill Color", Color) = (1,1,1,1)
+	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
+
+	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
+>>>>>>> main
 	_OutlineTex			("Outline Texture", 2D) = "white" {}
 	_OutlineWidth		("Outline Thickness", Range(0, 1)) = 0
 	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[HDR]_GlowColor		("Color", Color) = (0, 1, 0, 0.5)
 =======
 	_GlowColor		    ("Color", Color) = (0, 1, 0, 0.5)
+>>>>>>> main
+=======
+	[HDR]_GlowColor		("Color", Color) = (0, 1, 0, 0.5)
 >>>>>>> main
 	_GlowOffset			("Offset", Range(-1,1)) = 0
 	_GlowInner			("Inner", Range(0,1)) = 0.05
@@ -111,10 +122,14 @@ SubShader {
 		#include "UnityCG.cginc"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct v2f {
 =======
 		struct v2f
 		{
+>>>>>>> main
+=======
+		struct v2f {
 >>>>>>> main
 			V2F_SHADOW_CASTER;
 			float2	uv			: TEXCOORD1;

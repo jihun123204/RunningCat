@@ -2,6 +2,7 @@ Shader "TextMeshPro/Mobile/Bitmap" {
 
 Properties {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_MainTex		("Font Atlas", 2D) = "white" {}
 	[HDR]_Color		("Text Color", Color) = (1,1,1,1)
 	_DiffusePower	("Diffuse Power", Range(1.0,4.0)) = 1.0
@@ -25,22 +26,32 @@ Properties {
 	_MainTex		    ("Font Atlas", 2D) = "white" {}
 	_Color		        ("Text Color", Color) = (1,1,1,1)
 	_DiffusePower	    ("Diffuse Power", Range(1.0,4.0)) = 1.0
+=======
+	_MainTex		("Font Atlas", 2D) = "white" {}
+	[HDR]_Color		("Text Color", Color) = (1,1,1,1)
+	_DiffusePower	("Diffuse Power", Range(1.0,4.0)) = 1.0
+>>>>>>> main
 
-	_VertexOffsetX      ("Vertex OffsetX", float) = 0
-	_VertexOffsetY      ("Vertex OffsetY", float) = 0
-	_MaskSoftnessX      ("Mask SoftnessX", float) = 0
-	_MaskSoftnessY      ("Mask SoftnessY", float) = 0
+	_VertexOffsetX("Vertex OffsetX", float) = 0
+	_VertexOffsetY("Vertex OffsetY", float) = 0
+	_MaskSoftnessX("Mask SoftnessX", float) = 0
+	_MaskSoftnessY("Mask SoftnessY", float) = 0
 
-	_ClipRect           ("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
+	_ClipRect("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
 
-	_StencilComp        ("Stencil Comparison", Float) = 8
-	_Stencil            ("Stencil ID", Float) = 0
-	_StencilOp          ("Stencil Operation", Float) = 0
-	_StencilWriteMask   ("Stencil Write Mask", Float) = 255
-	_StencilReadMask    ("Stencil Read Mask", Float) = 255
+	_StencilComp("Stencil Comparison", Float) = 8
+	_Stencil("Stencil ID", Float) = 0
+	_StencilOp("Stencil Operation", Float) = 0
+	_StencilWriteMask("Stencil Write Mask", Float) = 255
+	_StencilReadMask("Stencil Read Mask", Float) = 255
 
+<<<<<<< HEAD
 	_CullMode           ("Cull Mode", Float) = 0
 	_ColorMask          ("Color Mask", Float) = 15
+>>>>>>> main
+=======
+	_CullMode("Cull Mode", Float) = 0
+	_ColorMask("Color Mask", Float) = 15
 >>>>>>> main
 }
 
@@ -78,6 +89,7 @@ SubShader {
 
 		#include "UnityCG.cginc"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		struct appdata_t {
 =======
@@ -86,6 +98,10 @@ SubShader {
 		struct appdata_t
 		{
 >>>>>>> main
+=======
+
+		struct appdata_t {
+>>>>>>> main
 			float4 vertex : POSITION;
 			fixed4 color : COLOR;
 			float2 texcoord0 : TEXCOORD0;
@@ -93,10 +109,14 @@ SubShader {
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct v2f {
 =======
 		struct v2f
 		{
+>>>>>>> main
+=======
+		struct v2f {
 >>>>>>> main
 			float4 vertex		: POSITION;
 			fixed4 color		: COLOR;
@@ -114,10 +134,13 @@ SubShader {
 		uniform float		_MaskSoftnessX;
 		uniform float		_MaskSoftnessY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		uniform float		_UIMaskSoftnessX;
         uniform float		_UIMaskSoftnessY;
         uniform int _UIVertexColorAlwaysGammaSpace;
+>>>>>>> main
+=======
 >>>>>>> main
 
 		v2f vert (appdata_t v)
@@ -129,6 +152,7 @@ SubShader {
 
 			vert.xy += (vert.w * 0.5) / _ScreenParams.xy;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			OUT.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
 =======
@@ -137,6 +161,10 @@ SubShader {
                 v.color.rgb = UIGammaToLinear(v.color.rgb);
             }
             OUT.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
+>>>>>>> main
+=======
+
+			OUT.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
 >>>>>>> main
 			OUT.color = v.color;
 			OUT.color *= _Color;
@@ -148,12 +176,17 @@ SubShader {
 
 			// Clamp _ClipRect to 16bit.
 <<<<<<< HEAD
+<<<<<<< HEAD
 			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
 			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 =======
 			const float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
 			const half2 maskSoftness = half2(max(_UIMaskSoftnessX, _MaskSoftnessX), max(_UIMaskSoftnessY, _MaskSoftnessY));
 			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * maskSoftness + pixelSize.xy));
+>>>>>>> main
+=======
+			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
+			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 >>>>>>> main
 
 			return OUT;

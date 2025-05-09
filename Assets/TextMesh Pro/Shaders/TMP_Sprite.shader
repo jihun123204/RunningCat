@@ -3,6 +3,9 @@ Shader "TextMeshPro/Sprite"
 	Properties
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		
@@ -15,6 +18,7 @@ Shader "TextMeshPro/Sprite"
 		_CullMode ("Cull Mode", Float) = 0
 		_ColorMask ("Color Mask", Float) = 15
 		_ClipRect ("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
+<<<<<<< HEAD
 =======
         _MainTex            ("Sprite Texture", 2D) = "white" {}
 		_Color              ("Tint", Color) = (1,1,1,1)
@@ -29,6 +33,8 @@ Shader "TextMeshPro/Sprite"
 		_ColorMask          ("Color Mask", Float) = 15
 		_ClipRect           ("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
 >>>>>>> main
+=======
+>>>>>>> main
 
 		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
 	}
@@ -37,10 +43,14 @@ Shader "TextMeshPro/Sprite"
 	{
 		Tags
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
 		{ 
 			"Queue"="Transparent" 
 			"IgnoreProjector"="True" 
 			"RenderType"="Transparent" 
+<<<<<<< HEAD
 			"PreviewType"="Plane"
 			"CanUseSpriteAtlas"="True"
 		}
@@ -55,14 +65,24 @@ Shader "TextMeshPro/Sprite"
 		}
 
 >>>>>>> main
+=======
+			"PreviewType"="Plane"
+			"CanUseSpriteAtlas"="True"
+		}
+		
+>>>>>>> main
 		Stencil
 		{
 			Ref [_Stencil]
 			Comp [_StencilComp]
 <<<<<<< HEAD
+<<<<<<< HEAD
 			Pass [_StencilOp] 
 =======
 			Pass [_StencilOp]
+>>>>>>> main
+=======
+			Pass [_StencilOp] 
 >>>>>>> main
 			ReadMask [_StencilReadMask]
 			WriteMask [_StencilWriteMask]
@@ -89,9 +109,13 @@ Shader "TextMeshPro/Sprite"
             #pragma multi_compile __ UNITY_UI_CLIP_RECT
             #pragma multi_compile __ UNITY_UI_ALPHACLIP
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
 =======
 
+>>>>>>> main
+=======
+			
 >>>>>>> main
 			struct appdata_t
 			{
@@ -104,10 +128,14 @@ Shader "TextMeshPro/Sprite"
 			struct v2f
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
 				float4 vertex   : SV_POSITION;
 				fixed4 color    : COLOR;
                 float2 texcoord  : TEXCOORD0;
 				float4 worldPosition : TEXCOORD1;
+<<<<<<< HEAD
                 UNITY_VERTEX_OUTPUT_STEREO
 			};
 			
@@ -121,16 +149,24 @@ Shader "TextMeshPro/Sprite"
 			};
 
 >>>>>>> main
+=======
+                UNITY_VERTEX_OUTPUT_STEREO
+			};
+			
+>>>>>>> main
             sampler2D _MainTex;
 			fixed4 _Color;
 			fixed4 _TextureSampleAdd;
 			float4 _ClipRect;
             float4 _MainTex_ST;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		    float _UIMaskSoftnessX;
             float _UIMaskSoftnessY;
             int _UIVertexColorAlwaysGammaSpace;
+>>>>>>> main
+=======
 >>>>>>> main
 
             v2f vert(appdata_t v)
@@ -138,6 +174,7 @@ Shader "TextMeshPro/Sprite"
 				v2f OUT;
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
+<<<<<<< HEAD
 <<<<<<< HEAD
                 OUT.worldPosition = v.vertex;
 				OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
@@ -148,18 +185,22 @@ Shader "TextMeshPro/Sprite"
 				float4 vPosition = UnityObjectToClipPos(v.vertex);
             	OUT.worldPosition = v.vertex;
 				OUT.vertex = vPosition;
+=======
+                OUT.worldPosition = v.vertex;
+				OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
+>>>>>>> main
 
-            	float2 pixelSize = vPosition.w;
-                pixelSize /= abs(mul((float2x2)UNITY_MATRIX_P, _ScreenParams.xy));
-
-				float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
                 OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+<<<<<<< HEAD
                 OUT.mask = half4(v.vertex.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_UIMaskSoftnessX, _UIMaskSoftnessY) + abs(pixelSize.xy)));
 
                 if (_UIVertexColorAlwaysGammaSpace && !IsGammaSpace())
                 {
                     v.color.rgb = UIGammaToLinear(v.color.rgb);
                 }
+>>>>>>> main
+=======
+				
 >>>>>>> main
                 OUT.color = v.color * _Color;
 				return OUT;
@@ -168,6 +209,7 @@ Shader "TextMeshPro/Sprite"
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
+<<<<<<< HEAD
 <<<<<<< HEAD
 				
                 #ifdef UNITY_UI_CLIP_RECT
@@ -178,6 +220,11 @@ Shader "TextMeshPro/Sprite"
 				half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(IN.mask.xy)) * IN.mask.zw);
 				color *= m.x * m.y;
 >>>>>>> main
+=======
+				
+                #ifdef UNITY_UI_CLIP_RECT
+					color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
+>>>>>>> main
 				#endif
 
 				#ifdef UNITY_UI_ALPHACLIP
@@ -187,9 +234,13 @@ Shader "TextMeshPro/Sprite"
 				return color;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ENDCG
 =======
 		    ENDCG
+>>>>>>> main
+=======
+		ENDCG
 >>>>>>> main
 		}
 	}

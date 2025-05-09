@@ -7,6 +7,7 @@ Shader "TextMeshPro/Mobile/Distance Field" {
 
 Properties {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[HDR]_FaceColor     ("Face Color", Color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
@@ -17,13 +18,20 @@ Properties {
 	[HDR]_UnderlayColor	("Border Color", Color) = (0,0,0,.5)
 =======
 	_FaceColor          ("Face Color", Color) = (1,1,1,1)
+=======
+	[HDR]_FaceColor     ("Face Color", Color) = (1,1,1,1)
+>>>>>>> main
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
-	_OutlineColor	    ("Outline Color", Color) = (0,0,0,1)
+	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
 	_OutlineWidth		("Outline Thickness", Range(0,1)) = 0
 	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
+<<<<<<< HEAD
 	_UnderlayColor	    ("Border Color", Color) = (0,0,0,.5)
+>>>>>>> main
+=======
+	[HDR]_UnderlayColor	("Border Color", Color) = (0,0,0,.5)
 >>>>>>> main
 	_UnderlayOffsetX 	("Border OffsetX", Range(-1,1)) = 0
 	_UnderlayOffsetY 	("Border OffsetY", Range(-1,1)) = 0
@@ -93,8 +101,11 @@ SubShader {
 	Pass {
 		CGPROGRAM
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		#pragma enable_d3d11_debug_symbols
+>>>>>>> main
+=======
 >>>>>>> main
 		#pragma vertex VertShader
 		#pragma fragment PixShader
@@ -114,9 +125,13 @@ SubShader {
 			float3	normal			: NORMAL;
 			fixed4	color			: COLOR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			float2	texcoord0		: TEXCOORD0;
 =======
 			float4	texcoord0		: TEXCOORD0;
+>>>>>>> main
+=======
+			float2	texcoord0		: TEXCOORD0;
 >>>>>>> main
 			float2	texcoord1		: TEXCOORD1;
 		};
@@ -137,10 +152,13 @@ SubShader {
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		float _UIMaskSoftnessX;
         float _UIMaskSoftnessY;
         int _UIVertexColorAlwaysGammaSpace;
+>>>>>>> main
+=======
 >>>>>>> main
 
 		pixel_t VertShader(vertex_t input)
@@ -153,9 +171,13 @@ SubShader {
 			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			float bold = step(input.texcoord1.y, 0);
 =======
 			float bold = step(input.texcoord0.w, 0);
+>>>>>>> main
+=======
+			float bold = step(input.texcoord1.y, 0);
 >>>>>>> main
 
 			float4 vert = input.vertex;
@@ -168,9 +190,13 @@ SubShader {
 
 			float scale = rsqrt(dot(pixelSize, pixelSize));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			scale *= abs(input.texcoord1.y) * _GradientScale * (_Sharpness + 1);
 =======
 			scale *= abs(input.texcoord0.w) * _GradientScale * (_Sharpness + 1);
+>>>>>>> main
+=======
+			scale *= abs(input.texcoord1.y) * _GradientScale * (_Sharpness + 1);
 >>>>>>> main
 			if(UNITY_MATRIX_P[3][3] == 0) scale = lerp(abs(scale) * (1 - _PerspectiveFilter), scale, abs(dot(UnityObjectToWorldNormal(input.normal.xyz), normalize(WorldSpaceViewDir(vert)))));
 
@@ -184,6 +210,7 @@ SubShader {
 			float outline = _OutlineWidth * _ScaleRatioA * 0.5 * scale;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			float opacity = input.color.a;
 =======
             if (_UIVertexColorAlwaysGammaSpace && !IsGammaSpace())
@@ -191,6 +218,9 @@ SubShader {
                 input.color.rgb = UIGammaToLinear(input.color.rgb);
             }
             float opacity = input.color.a;
+>>>>>>> main
+=======
+			float opacity = input.color.a;
 >>>>>>> main
 			#if (UNDERLAY_ON | UNDERLAY_INNER)
 			opacity = 1.0;
@@ -224,11 +254,15 @@ SubShader {
 			output.texcoord0 = float4(input.texcoord0.x, input.texcoord0.y, maskUV.x, maskUV.y);
 			output.param = half4(scale, bias - outline, bias + outline, bias);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			output.mask = half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 =======
 
 			const half2 maskSoftness = half2(max(_UIMaskSoftnessX, _MaskSoftnessX), max(_UIMaskSoftnessY, _MaskSoftnessY));
 			output.mask = half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * maskSoftness + pixelSize.xy));
+>>>>>>> main
+=======
+			output.mask = half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 >>>>>>> main
 			#if (UNDERLAY_ON || UNDERLAY_INNER)
 			output.texcoord1 = float4(input.texcoord0 + layerOffset, input.color.a, 0);

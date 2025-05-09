@@ -6,9 +6,13 @@ void VertShader(inout appdata_full v, out Input data)
 	UNITY_INITIALIZE_OUTPUT(Input, data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	float bold = step(v.texcoord1.y, 0);
 =======
 	float bold = step(v.texcoord.w, 0);
+>>>>>>> main
+=======
+	float bold = step(v.texcoord1.y, 0);
 >>>>>>> main
 
 	// Generate normal for backface
@@ -25,20 +29,30 @@ void VertShader(inout appdata_full v, out Input data)
 	pixelSize /= float2(_ScaleX, _ScaleY) * mul((float2x2)UNITY_MATRIX_P, _ScreenParams.xy);
 	float scale = rsqrt(dot(pixelSize, pixelSize));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	scale *= abs(v.texcoord1.y) * _GradientScale * (_Sharpness + 1);
 =======
 	scale *= abs(v.texcoord.w) * _GradientScale * (_Sharpness + 1);
+>>>>>>> main
+=======
+	scale *= abs(v.texcoord1.y) * _GradientScale * (_Sharpness + 1);
 >>>>>>> main
 	scale = lerp(scale * (1 - _PerspectiveFilter), scale, abs(dot(UnityObjectToWorldNormal(v.normal.xyz), normalize(WorldSpaceViewDir(vert)))));
 	data.param.y = scale;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data.param.x = (lerp(_WeightNormal, _WeightBold, bold) / 4.0 + _FaceDilate) * _ScaleRatioA * 0.5; // 
 
 	v.texcoord1.xy = UnpackUV(v.texcoord1.x);
 =======
 	data.param.x = (lerp(_WeightNormal, _WeightBold, bold) / 4.0 + _FaceDilate) * _ScaleRatioA * 0.5; //
+>>>>>>> main
+=======
+	data.param.x = (lerp(_WeightNormal, _WeightBold, bold) / 4.0 + _FaceDilate) * _ScaleRatioA * 0.5; // 
+
+	v.texcoord1.xy = UnpackUV(v.texcoord1.x);
 >>>>>>> main
 	data.viewDirEnv = mul((float3x3)_EnvMatrix, WorldSpaceViewDir(v.vertex));
 }
@@ -95,9 +109,13 @@ void PixShader(Input input, inout SurfaceOutput o)
 	float3 emission = float3(0, 0, 0);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 
+>>>>>>> main
+=======
+	
 >>>>>>> main
 #if GLOW_ON
 	float4 glowColor = GetGlowColor(sd, scale);

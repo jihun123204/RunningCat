@@ -2,6 +2,7 @@ Shader "TextMeshPro/Bitmap" {
 
 Properties {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_MainTex		("Font Atlas", 2D) = "white" {}
 	_FaceTex		("Font Texture", 2D) = "white" {}
 	[HDR]_FaceColor	("Text Color", Color) = (1,1,1,1)
@@ -25,22 +26,32 @@ Properties {
 	_MainTex		    ("Font Atlas", 2D) = "white" {}
 	_FaceTex		    ("Font Texture", 2D) = "white" {}
 	_FaceColor	        ("Text Color", Color) = (1,1,1,1)
+=======
+	_MainTex		("Font Atlas", 2D) = "white" {}
+	_FaceTex		("Font Texture", 2D) = "white" {}
+	[HDR]_FaceColor	("Text Color", Color) = (1,1,1,1)
+>>>>>>> main
 
-	_VertexOffsetX	    ("Vertex OffsetX", float) = 0
-	_VertexOffsetY	    ("Vertex OffsetY", float) = 0
-	_MaskSoftnessX	    ("Mask SoftnessX", float) = 0
-	_MaskSoftnessY	    ("Mask SoftnessY", float) = 0
+	_VertexOffsetX	("Vertex OffsetX", float) = 0
+	_VertexOffsetY	("Vertex OffsetY", float) = 0
+	_MaskSoftnessX	("Mask SoftnessX", float) = 0
+	_MaskSoftnessY	("Mask SoftnessY", float) = 0
 
-	_ClipRect           ("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
+	_ClipRect("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
 
-	_StencilComp        ("Stencil Comparison", Float) = 8
-	_Stencil            ("Stencil ID", Float) = 0
-	_StencilOp          ("Stencil Operation", Float) = 0
-	_StencilWriteMask   ("Stencil Write Mask", Float) = 255
-	_StencilReadMask    ("Stencil Read Mask", Float) = 255
+	_StencilComp("Stencil Comparison", Float) = 8
+	_Stencil("Stencil ID", Float) = 0
+	_StencilOp("Stencil Operation", Float) = 0
+	_StencilWriteMask("Stencil Write Mask", Float) = 255
+	_StencilReadMask("Stencil Read Mask", Float) = 255
 
+<<<<<<< HEAD
 	_CullMode           ("Cull Mode", Float) = 0
 	_ColorMask          ("Color Mask", Float) = 15
+>>>>>>> main
+=======
+	_CullMode("Cull Mode", Float) = 0
+	_ColorMask("Color Mask", Float) = 15
 >>>>>>> main
 }
 
@@ -77,6 +88,7 @@ SubShader{
 
 		#include "UnityCG.cginc"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		struct appdata_t {
 			float4 vertex		: POSITION;
@@ -88,17 +100,22 @@ SubShader{
 		struct v2f {
 =======
 		#include "UnityUI.cginc"
+=======
+>>>>>>> main
 
-		struct appdata_t
-		{
+		struct appdata_t {
 			float4 vertex		: POSITION;
 			fixed4 color		: COLOR;
-			float4 texcoord0	: TEXCOORD0;
+			float2 texcoord0	: TEXCOORD0;
 			float2 texcoord1	: TEXCOORD1;
 		};
 
+<<<<<<< HEAD
 		struct v2f
 		{
+>>>>>>> main
+=======
+		struct v2f {
 >>>>>>> main
 			float4	vertex		: SV_POSITION;
 			fixed4	color		: COLOR;
@@ -118,6 +135,9 @@ SubShader{
 		uniform float		_MaskSoftnessX;
 		uniform float		_MaskSoftnessY;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
 
 		float2 UnpackUV(float uv)
 		{
@@ -127,10 +147,13 @@ SubShader{
 
 			return output * 0.001953125;
 		}
+<<<<<<< HEAD
 =======
 		uniform float		_UIMaskSoftnessX;
         uniform float		_UIMaskSoftnessY;
         uniform int _UIVertexColorAlwaysGammaSpace;
+>>>>>>> main
+=======
 >>>>>>> main
 
 		v2f vert (appdata_t v)
@@ -144,11 +167,14 @@ SubShader{
 			float4 vPosition = UnityPixelSnap(UnityObjectToClipPos(vert));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             if (_UIVertexColorAlwaysGammaSpace && !IsGammaSpace())
             {
                 v.color.rgb = UIGammaToLinear(v.color.rgb);
             }
+>>>>>>> main
+=======
 >>>>>>> main
 			fixed4 faceColor = v.color;
 			faceColor *= _FaceColor;
@@ -158,14 +184,19 @@ SubShader{
 			OUT.color = faceColor;
 			OUT.texcoord0 = v.texcoord0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			OUT.texcoord1 = TRANSFORM_TEX(UnpackUV(v.texcoord1), _FaceTex);
 =======
 			OUT.texcoord1 = TRANSFORM_TEX(v.texcoord1, _FaceTex);
+>>>>>>> main
+=======
+			OUT.texcoord1 = TRANSFORM_TEX(UnpackUV(v.texcoord1), _FaceTex);
 >>>>>>> main
 			float2 pixelSize = vPosition.w;
 			pixelSize /= abs(float2(_ScreenParams.x * UNITY_MATRIX_P[0][0], _ScreenParams.y * UNITY_MATRIX_P[1][1]));
 
 			// Clamp _ClipRect to 16bit.
+<<<<<<< HEAD
 <<<<<<< HEAD
 			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
 			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
@@ -173,6 +204,10 @@ SubShader{
 			const float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
 			const half2 maskSoftness = half2(max(_UIMaskSoftnessX, _MaskSoftnessX), max(_UIMaskSoftnessY, _MaskSoftnessY));
 			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * maskSoftness + pixelSize.xy));
+>>>>>>> main
+=======
+			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
+			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 >>>>>>> main
 
 			return OUT;
