@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource sfxSource;
     public AudioSource bgmSource;
+
+    [Header("Area BGM")]
+    public AudioClip mainSceneBGM;
+    public AudioClip area1BGM;
+    public AudioClip area2BGM;
+    public AudioClip area3BGM;
 
     private void Awake()
     {
@@ -31,9 +38,35 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        if (fieldBGM != null)
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (currentScene == "MainScene" && mainSceneBGM != null)
+        {
+            PlayBGM(mainSceneBGM);
+        }
+        else if (fieldBGM != null)
         {
             PlayBGM(fieldBGM);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("🎵 씬 로드됨: " + scene.name);
+
+        if (scene.name == "MainScene" && mainSceneBGM != null)
+        {
+            Debug.Log("🎵 메인씬 BGM 재생 시작");
+            PlayBGM(mainSceneBGM);
         }
     }
 
@@ -83,5 +116,15 @@ public void SetSFXVolume(float value)
         Debug.Log($"🎯 SFX 볼륨 설정: {sfxSource.volume}");
     }
 }
+
+    public void PlayAreaBGM(AudioClip areaClip)
+    {
+        if (areaClip != null && bgmSource.clip != areaClip)
+        {
+            bgmSource.clip = areaClip;
+            bgmSource.Play();
+        }
+    }
+
 
 }

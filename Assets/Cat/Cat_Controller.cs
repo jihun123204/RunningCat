@@ -12,6 +12,10 @@ public class CatController : MonoBehaviour
     public float jumpHeightOffset = 0.5f;
     private bool isGrounded = true;
 
+     // 플레이어 이동 관련 기준 값
+    public float forwardSpeed = 3f;
+
+
     // 슬라이드용 콜라이더 사이즈 및 오프셋
     private Vector2 originalColliderSize;
     private Vector2 slideColliderSize;
@@ -128,4 +132,16 @@ public class CatController : MonoBehaviour
             animator.Play("Cat_isrunning");
         }
     }
+    
+    public void FixedUpdate()
+    {
+        Vector3 velocity = rb2d.velocity; // 가속도
+        velocity.x = forwardSpeed; // 똑같은 속도
+
+        rb2d.velocity = velocity;
+        
+        float angle = Mathf.Clamp((rb2d.velocity.y * 10f), -90, 90);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+    
 }
