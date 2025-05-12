@@ -13,7 +13,7 @@ public class Can : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // 충돌한 오브젝트에서 PlayerHealth 컴포넌트를 가져옴
-            PlayerHealth health = other.GetComponent<PlayerHealth>();
+            Player health = other.GetComponent<Player>();
 
             // PlayerHealth 컴포넌트가 있다면 체력 회복 실행
             if (health != null)

@@ -194,14 +194,22 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Obstacle>() != null && !isInvincible)  //장애물 컴포넌트를 가진 오브젝트와 충돌하고 무적상태가 아닐때
+        if (other.GetComponent<Obstacle>() != null && !isInvincible)  // 장애물 컴포넌트를 가진 오브젝트와 충돌하고 무적상태가 아닐때
         {
             Player health = GetComponent<Player>();
             if (health != null)
             {
                 health.TakeDamage(10); // 체력 감소 수치는 조절 가능
+                StartCoroutine(ObstacleCoroutine()); // 무적 상태 코루틴 시작
             }
         }
+    }
+
+    private IEnumerator ObstacleCoroutine()
+    {
+        isInvincible = true; // 무적 상태로 설정
+        yield return new WaitForSeconds(isInvincibleTime); // 일정 시간(여기서는 3초) 동안 대기
+        isInvincible = false; // 무적 상태 해제
     }
 
 
