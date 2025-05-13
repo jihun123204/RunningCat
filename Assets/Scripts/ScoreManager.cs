@@ -8,7 +8,10 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
 
     [SerializeField] private int score = 0;  //현재점수
+    [SerializeField] private int highScore = 0;  // 최고 점수
+
     [SerializeField] private TextMeshProUGUI scoreText;  // 점수출력 UI
+    [SerializeField] private TextMeshProUGUI highScoreText;  // 최고 점수 출력 UI
 
 
     private void Awake()
@@ -29,18 +32,28 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        highScore = PlayerPrefs.GetInt("HighScore", 0);  // 저장된 최고 점수 불러오기
         UpdateScoreUI();  //시작할때 점수 UI 반영
     }
 
     public void AddScore(int amount)
     {
         score += amount;    //점수 누적
+
+        // 최고 점수 갱신 확인
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);  // 최고 점수 저장
+        }
+
         UpdateScoreUI();    // 점수 UI 반영
     }
 
     private void UpdateScoreUI()
     {
         scoreText.text = "Score: " + score;    //텍스트 표시
+        highScoreText.text = "High Score: " + highScore;
     }
 
 }
