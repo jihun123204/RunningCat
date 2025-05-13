@@ -18264,6 +18264,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94e5b6de77a4e4155b1b14e0a8801db5, type: 3}
+--- !u!1001 &770254720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0899717
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909912282764759054, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747588311559852382, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
+      propertyPath: m_Name
+      value: Churu
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76762278f47cf8e428a782231ed0fb59, type: 3}
 --- !u!1001 &771821695
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43173,7 +43230,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -43242,7 +43299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989eab52c583b467485fa765c30440fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 10
+  normalSpeed: 5
   jumpForce: 10
   jumpHeightOffset: 0.5
   boostedSpeed: 15
@@ -49643,3 +49700,4 @@ SceneRoots:
   - {fileID: 1365492542}
   - {fileID: 77568865}
   - {fileID: 767167178}
+  - {fileID: 770254720}

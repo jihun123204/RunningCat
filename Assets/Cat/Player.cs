@@ -211,13 +211,17 @@ public class Player : MonoBehaviour
     {
         if (other.GetComponent<Obstacle>() != null && !isInvincible)  // 장애물 컴포넌트를 가진 오브젝트와 충돌하고 무적상태가 아닐때
         {
+        
             Player health = GetComponent<Player>();
             if (health != null)
             {
+                animator.SetTrigger("Hit");
                 health.TakeDamage(10); // 체력 감소 수치는 조절 가능
                 StartCoroutine(ObstacleCoroutine()); // 무적 상태 코루틴 시작
             }
         }
+
+        
     }
 
     private IEnumerator ObstacleCoroutine()
@@ -239,6 +243,8 @@ public class Player : MonoBehaviour
     {
         isInvincible = true;                 // 무적 상태로 설정
         currentSpeed = boostedSpeed;         // 속도를 증가시킴
+        
+        StartCoroutine(DashFlashEffect());
 
         yield return new WaitForSeconds(duration);   // 일정 시간(여기서는 3초) 동안 대기
 
@@ -292,9 +298,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
-
-
     // 게임 오버 처리
     void Dead()
     {
@@ -302,5 +305,31 @@ public class Player : MonoBehaviour
         animator.SetBool("Dead", true);
         Die = true;
         //  이제 이곳에 캐릭터 사망시 GameOver UI 등을 넣으시면 됩니다
+    }
+
+    private IEnumerator DashFlashEffect()
+    {
+        if (spriteTransform == null)
+            yield break;
+
+        SpriteRenderer sr = spriteTransform.GetComponent<SpriteRenderer>();
+        if (sr == null)
+            yield break;
+
+        float flashInterval = 0.1f;    // 반짝이는 간격
+        float elapsed = 0f;
+
+        while (elapsed < isInvincibleTime)
+        {
+            sr.color = new Color(1f, 1f, 1f, 0.5f); // 반투명하게
+            yield return new WaitForSeconds(flashInterval);
+
+            sr.color = new Color(1f, 1f, 1f, 1f);   // 원래 색상
+            yield return new WaitForSeconds(flashInterval);
+
+            elapsed += flashInterval * 2;
+        }
+
+        sr.color = new Color(1f, 1f, 1f, 1f); // 효과 끝나면 정상 복원
     }
 }
