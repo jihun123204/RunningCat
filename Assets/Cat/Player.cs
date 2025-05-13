@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private bool isPlayer = false;
     private bool isSliding = false;
+
+
     
     // 플레이어 이동 관련 기준 값
-    public float forwardSpeed = 3f;
+    public float normalSpeed = 3f;
     public float jumpForce = 7f;
     public float jumpHeightOffset = 0.5f;
     private bool isGrounded = true;
@@ -20,6 +22,10 @@ public class Player : MonoBehaviour
     private float currentSpeed;       // 현재 속도를 추적
     public float timetospeedUp = 10f; //  몇초마다 속도 증가할건지
     public float speedUpAmount = 1f; // 몇만큼 속도 증가할건지
+    public Transform groundCheck;         // 바닥 체크를 위한 트랜스폼
+    public LayerMask groundLayer;        // 바닥 레이어
+    public int maxJumpCount = 2;         // 최대 점프 횟수
+    private int jumpCount;             // 현재 점프 횟수
 
     // 슬라이드용 콜라이더 사이즈 및 오프셋
     private Vector2 originalColliderSize;
@@ -44,6 +50,12 @@ public class Player : MonoBehaviour
     private float healthTimer = 0f;
 
     public bool Die = false;
+
+    private void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();    // Rigidbody2D 컴포넌트를 가져와서 변수에 저장
+        currentSpeed = normalSpeed;          // 초기 속도는 기본 속도
+    }
 
     void Start()
     {
@@ -128,6 +140,7 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Jump");
 
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpCount++;
 
             isGrounded = false;
 
@@ -174,7 +187,7 @@ public class Player : MonoBehaviour
             return;
 
         Vector3 velocity = rb2d.velocity;     //      가속도
-        velocity.x = forwardSpeed;      //       똑같은 속도
+        velocity.x = currentSpeed;      //       똑같은 속도
 
         rb2d.velocity = velocity;
 
@@ -228,7 +241,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(duration);   // 일정 시간(여기서는 3초) 동안 대기
 
         isInvincible = false;                // 무적 상태 해제
-        currentSpeed = forwardSpeed;          // 속도를 원래대로 되돌림
+        currentSpeed = normalSpeed;          // 속도를 원래대로 되돌림
     }
 
     // 외부에서 무적 상태를 확인할 수 있도록 반환
@@ -268,11 +281,11 @@ public class Player : MonoBehaviour
         while (true) // 무한 루프
         {
             yield return new WaitForSeconds(timetospeedUp);  //10초 기다림
-            forwardSpeed += speedUpAmount; // 속도 증가
+            normalSpeed += speedUpAmount; // 속도 증가
 
             if (!isInvincible) // 무적 상태가 아닐 때만 속도 증가
             {
-                currentSpeed = forwardSpeed; // 현재 속도를 기본 속도로 설정
+                currentSpeed = normalSpeed; // 현재 속도를 기본 속도로 설정
             }
         }
     }
