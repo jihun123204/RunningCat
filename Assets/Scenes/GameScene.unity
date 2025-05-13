@@ -43105,7 +43105,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989eab52c583b467485fa765c30440fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   normalSpeed: 3
+=======
+  normalSpeed: 5
+>>>>>>> origin/Khs_Branch
   jumpForce: 10
   jumpHeightOffset: 0.5
   boostedSpeed: 15
