@@ -133,8 +133,8 @@ public class Player : MonoBehaviour
 
         // 점프
         if (Die == true) return;
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+                                            // isGround 대신 넣은 조건 코드 <두번 이상 점프할 수 없다>
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
         {
             animator.ResetTrigger("Slide");
             animator.SetTrigger("Jump");
@@ -200,7 +200,9 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             animator.speed = 1f;
+            animator.ResetTrigger("Jump");      //      착지 시 달리기 애니메이션이 씹히지 않게 하기 위해
             animator.Play("Cat_isrunning");
+            jumpCount = 0;      //      바닥에 착지할 때 마다 "점프 횟수 초기화" 로 2단점프 지속 가능
         }
     }
 
