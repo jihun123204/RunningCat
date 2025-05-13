@@ -1,10 +1,8 @@
 using UnityEngine;
-<<<<<<< HEAD
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-=======
->>>>>>> origin/Khs_Branch
+
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +11,6 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private bool isPlayer = false;
     private bool isSliding = false;
-<<<<<<< HEAD
 
 
     
@@ -30,14 +27,7 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;        // 바닥 레이어
     public int maxJumpCount = 2;         // 최대 점프 횟수
     private int jumpCount;             // 현재 점프 횟수
-=======
-    
-    // 플레이어 이동 관련 기준 값
-    public float forwardSpeed = 3f;
-    public float jumpForce = 7f;
-    public float jumpHeightOffset = 0.5f;
-    private bool isGrounded = true;
->>>>>>> origin/Khs_Branch
+
 
     // 슬라이드용 콜라이더 사이즈 및 오프셋
     private Vector2 originalColliderSize;
@@ -51,7 +41,6 @@ public class Player : MonoBehaviour
     private Vector3 slideSpriteOffset = new Vector3(0, -0.1f, 0);
 
     // 플레이어 체력 및 초당 틱뎀
-<<<<<<< HEAD
     private bool isInvincible = false;  // 무적 상태 여부
     public float isInvincibleTime = 3f; // 무적 상태 지속 시간
     public int maxHealth = 100;
@@ -59,17 +48,11 @@ public class Player : MonoBehaviour
 
     public Slider hpSlider;  // 체력바 UI
 
-=======
-    public int maxHealth = 100;
-    public int currentHealth;
-
->>>>>>> origin/Khs_Branch
     public int healthDrainRate = 10;      //      초당 ?씩 체력 까이는 코드
     private float healthTimer = 0f;
 
     public bool Die = false;
 
-<<<<<<< HEAD
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();    // Rigidbody2D 컴포넌트를 가져와서 변수에 저장
@@ -80,12 +63,7 @@ public class Player : MonoBehaviour
     {
         // ✅ 자식 스프라이트 오브젝트 가져오기
         spriteTransform = transform.Find("Cat_OB");  // 자식 이름에 맞게 수정
-=======
-    void Start()
-    {
-        // ✅ 자식 스프라이트 오브젝트 가져오기
-        spriteTransform = transform.Find("Model");  // 자식 이름에 맞게 수정
->>>>>>> origin/Khs_Branch
+
         if (spriteTransform != null)
         {
             animator = spriteTransform.GetComponent<Animator>(); // 자식에서 Animator 가져오기
@@ -93,11 +71,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-<<<<<<< HEAD
             Debug.LogWarning("❗ 'Cat_OB' 자식 오브젝트를 찾을 수 없습니다. 이름이 정확한지 확인하세요.");
-=======
-            Debug.LogWarning("❗ 'Model' 자식 오브젝트를 찾을 수 없습니다. 이름이 정확한지 확인하세요.");
->>>>>>> origin/Khs_Branch
         }
 
         rb2d = GetComponent<Rigidbody2D>();
@@ -115,14 +89,12 @@ public class Player : MonoBehaviour
 
         // 현재 체력에 최대 체력값으로 초기화
         currentHealth = maxHealth;
-<<<<<<< HEAD
+
         // UIHP 체력표시 업데이트
         UpdateHPUI();
 
         // 속도 증가 코루틴 시작   
         StartCoroutine(SpeedUpOverTime());
-=======
->>>>>>> origin/Khs_Branch
     }
 
 
@@ -136,11 +108,8 @@ public class Player : MonoBehaviour
         if (Die == true) return;
 
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) 
-<<<<<<< HEAD
+
             && stateInfo.IsName("Cat_isrunning"))
-=======
-            && stateInfo.IsName("Run"))
->>>>>>> origin/Khs_Branch
         {
             animator.ResetTrigger("Jump");
             animator.SetTrigger("Slide");
@@ -157,11 +126,7 @@ public class Player : MonoBehaviour
         if ((Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift)) && isSliding)
         {
             animator.ResetTrigger("Slide");
-<<<<<<< HEAD
             animator.Play("Cat_isrunning");
-=======
-            animator.Play("Run");
->>>>>>> origin/Khs_Branch
             isSliding = false;
 
             boxCollider.size = originalColliderSize;
@@ -173,25 +138,15 @@ public class Player : MonoBehaviour
 
         // 점프
         if (Die == true) return;
-<<<<<<< HEAD
                                             // isGround 대신 넣은 조건 코드 <두번 이상 점프할 수 없다>
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
-=======
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
->>>>>>> origin/Khs_Branch
         {
             animator.ResetTrigger("Slide");
             animator.SetTrigger("Jump");
 
-<<<<<<< HEAD
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jumpCount++;
-=======
-            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
-            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            transform.position += new Vector3(0, jumpHeightOffset, 0);
->>>>>>> origin/Khs_Branch
 
             isGrounded = false;
 
@@ -222,10 +177,7 @@ public class Player : MonoBehaviour
         {
             currentHealth -= (int)healthDrainRate;
             healthTimer = 0f;
-<<<<<<< HEAD
             UpdateHPUI();
-=======
->>>>>>> origin/Khs_Branch
 
             Debug.Log($"현재 체력: {currentHealth}");
 
@@ -241,11 +193,7 @@ public class Player : MonoBehaviour
             return;
 
         Vector3 velocity = rb2d.velocity;     //      가속도
-<<<<<<< HEAD
         velocity.x = currentSpeed;      //       똑같은 속도
-=======
-        velocity.x = forwardSpeed;      //       똑같은 속도
->>>>>>> origin/Khs_Branch
 
         rb2d.velocity = velocity;
 
@@ -258,21 +206,11 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             animator.speed = 1f;
-<<<<<<< HEAD
             animator.ResetTrigger("Jump");      //      착지 시 달리기 애니메이션이 씹히지 않게 하기 위해
             animator.Play("Cat_isrunning");
             jumpCount = 0;      //      바닥에 착지할 때 마다 "점프 횟수 초기화" 로 2단점프 지속 가능
         }
     }
-
-=======
-            animator.Play("Run");
-        }
-    }
-
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/Khs_Branch
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -281,12 +219,8 @@ public class Player : MonoBehaviour
             Player health = GetComponent<Player>();
             if (health != null)
             {
-<<<<<<< HEAD
-=======
                 animator.SetTrigger("Hit"); // 맞는 애니메이션 트리거
 
-
->>>>>>> origin/Khs_Branch
                 health.TakeDamage(10); // 체력 감소 수치는 조절 가능
                 StartCoroutine(ObstacleCoroutine()); // 무적 상태 코루틴 시작
             }
@@ -365,13 +299,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
-
-
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> origin/Khs_Branch
     // 게임 오버 처리
     void Dead()
     {
