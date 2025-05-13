@@ -176,6 +176,101 @@ public class Player : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+=======
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Obstacle>() != null && !isInvincible)  // 장애물 컴포넌트를 가진 오브젝트와 충돌하고 무적상태가 아닐때
+        {
+            Player health = GetComponent<Player>();
+            if (health != null)
+            {
+                animator.SetTrigger("Hit"); // 맞는 애니메이션 트리거
+
+
+                health.TakeDamage(10); // 체력 감소 수치는 조절 가능
+                StartCoroutine(ObstacleCoroutine()); // 무적 상태 코루틴 시작
+            }
+        }
+    }
+
+    private IEnumerator ObstacleCoroutine()
+    {
+        isInvincible = true; // 무적 상태로 설정
+        yield return new WaitForSeconds(isInvincibleTime); // 일정 시간(여기서는 3초) 동안 대기
+        isInvincible = false; // 무적 상태 해제
+    }
+
+
+    // 츄르를 먹었을 때 실행되는 함수
+    public void ActivateChuruBuff(float duration)
+    {
+        StartCoroutine(ChuruBuffCoroutine(duration));   // 코루틴을 통해 일정 시간 동안 버프 효과를 주기
+    }
+
+    // 코루틴을 사용하여 츄르 버프 적용
+    private IEnumerator ChuruBuffCoroutine(float duration)
+    {
+        isInvincible = true;                 // 무적 상태로 설정
+        currentSpeed = boostedSpeed;         // 속도를 증가시킴
+
+        yield return new WaitForSeconds(duration);   // 일정 시간(여기서는 3초) 동안 대기
+
+        isInvincible = false;                // 무적 상태 해제
+        currentSpeed = normalSpeed;          // 속도를 원래대로 되돌림
+    }
+
+    // 외부에서 무적 상태를 확인할 수 있도록 반환
+    public bool IsInvincible()
+    {
+        return isInvincible;
+    }
+
+    //체력감소 함수
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHPUI();
+    }
+
+    //체력회복 함수
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHPUI();
+    }
+
+    // 체력 UI 업데이트 함수
+    private void UpdateHPUI()
+    {
+        if (hpSlider != null)
+        {
+            hpSlider.value = currentHealth;
+        }
+    }
+
+    // 속도 증가 코루틴
+    IEnumerator SpeedUpOverTime()
+    {
+        while (true) // 무한 루프
+        {
+            yield return new WaitForSeconds(timetospeedUp);  //10초 기다림
+            normalSpeed += speedUpAmount; // 속도 증가
+
+            if (!isInvincible) // 무적 상태가 아닐 때만 속도 증가
+            {
+                currentSpeed = normalSpeed; // 현재 속도를 기본 속도로 설정
+            }
+        }
+    }
+
+
+
+
+>>>>>>> Stashed changes
     // 게임 오버 처리
     void Dead()
     {
