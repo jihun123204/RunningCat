@@ -47,9 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHitSFX: {fileID: 0}
-  enemyHitSFX: {fileID: 0}
+  jumpSFX: {fileID: 8300000, guid: 0122096eb3a6c4d6cbd7b0155230e2a1, type: 3}
+  scoreSFX: {fileID: 0}
   fieldBGM: {fileID: 0}
   miniGameBGM: {fileID: 0}
+  gameOverBGM: {fileID: 8300000, guid: 7e00588aa3f724f7ebea1282ad4ab4af, type: 3}
   sfxSource: {fileID: 311222566428747944}
   bgmSource: {fileID: 8700937689974885559}
   mainSceneBGM: {fileID: 8300000, guid: 819a370c73ba142f6b6aa15f2934d062, type: 3}
