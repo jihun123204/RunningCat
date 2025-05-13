@@ -11,11 +11,17 @@ GameObject:
   - component: {fileID: 4349753432889785276}
   - component: {fileID: 8993353527506317356}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: 383611384827334260}
   - component: {fileID: 4722041992139618234}
   - component: {fileID: 577348422584823833}
 =======
 >>>>>>> origin/Khs_Branch
+=======
+  - component: {fileID: 383611384827334260}
+  - component: {fileID: 4722041992139618234}
+  - component: {fileID: 577348422584823833}
+>>>>>>> YDH_Branch
   m_Layer: 0
   m_Name: obstacle_CatPot
   m_TagString: Untagged
@@ -91,6 +97,9 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> YDH_Branch
 --- !u!114 &383611384827334260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,5 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0af50065cc55204583f00245b2b654d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 =======
 >>>>>>> origin/Khs_Branch
+=======
+>>>>>>> YDH_Branch

@@ -11,10 +11,15 @@ GameObject:
   - component: {fileID: 5393549204386461412}
   - component: {fileID: 682090274726386667}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: -6286356594729868262}
   - component: {fileID: -2094570138026761138}
 =======
 >>>>>>> origin/Khs_Branch
+=======
+  - component: {fileID: -6286356594729868262}
+  - component: {fileID: -2094570138026761138}
+>>>>>>> YDH_Branch
   m_Layer: 0
   m_Name: obstacle_SpeedSign
   m_TagString: Untagged
@@ -90,6 +95,9 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> YDH_Branch
 --- !u!114 &-6286356594729868262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,5 +155,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5454545, y: 5.9454546}
   m_EdgeRadius: 0
+<<<<<<< HEAD
 =======
 >>>>>>> origin/Khs_Branch
+=======
+>>>>>>> YDH_Branch
