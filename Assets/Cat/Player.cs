@@ -1,4 +1,8 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -7,12 +11,22 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private bool isPlayer = false;
     private bool isSliding = false;
+
+
     
     // 플레이어 이동 관련 기준 값
-    public float forwardSpeed = 3f;
+    public float normalSpeed = 3f;
     public float jumpForce = 7f;
     public float jumpHeightOffset = 0.5f;
     private bool isGrounded = true;
+    public float boostedSpeed = 15f;   // 츄르를 먹었을 때 증가하는 속도
+    private float currentSpeed;       // 현재 속도를 추적
+    public float timetospeedUp = 10f; //  몇초마다 속도 증가할건지
+    public float speedUpAmount = 1f; // 몇만큼 속도 증가할건지
+    public Transform groundCheck;         // 바닥 체크를 위한 트랜스폼
+    public LayerMask groundLayer;        // 바닥 레이어
+    public int maxJumpCount = 2;         // 최대 점프 횟수
+    private int jumpCount;             // 현재 점프 횟수
 
     // 슬라이드용 콜라이더 사이즈 및 오프셋
     private Vector2 originalColliderSize;
@@ -26,18 +40,28 @@ public class Player : MonoBehaviour
     private Vector3 slideSpriteOffset = new Vector3(0, -0.1f, 0);
 
     // 플레이어 체력 및 초당 틱뎀
+    private bool isInvincible = false;  // 무적 상태 여부
+    public float isInvincibleTime = 3f; // 무적 상태 지속 시간
     public int maxHealth = 100;
     public int currentHealth;
+
+    public Slider hpSlider;  // 체력바 UI
 
     public int healthDrainRate = 10;      //      초당 ?씩 체력 까이는 코드
     private float healthTimer = 0f;
 
     public bool Die = false;
 
+    private void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();    // Rigidbody2D 컴포넌트를 가져와서 변수에 저장
+        currentSpeed = normalSpeed;          // 초기 속도는 기본 속도
+    }
+
     void Start()
     {
         // ✅ 자식 스프라이트 오브젝트 가져오기
-        spriteTransform = transform.Find("Model");  // 자식 이름에 맞게 수정
+        spriteTransform = transform.Find("Cat_OB");  // 자식 이름에 맞게 수정
         if (spriteTransform != null)
         {
             animator = spriteTransform.GetComponent<Animator>(); // 자식에서 Animator 가져오기
@@ -45,7 +69,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("❗ 'Model' 자식 오브젝트를 찾을 수 없습니다. 이름이 정확한지 확인하세요.");
+            Debug.LogWarning("❗ 'Cat_OB' 자식 오브젝트를 찾을 수 없습니다. 이름이 정확한지 확인하세요.");
         }
 
         rb2d = GetComponent<Rigidbody2D>();
@@ -63,6 +87,11 @@ public class Player : MonoBehaviour
 
         // 현재 체력에 최대 체력값으로 초기화
         currentHealth = maxHealth;
+        // UIHP 체력표시 업데이트
+        UpdateHPUI();
+
+        // 속도 증가 코루틴 시작   
+        StartCoroutine(SpeedUpOverTime());
     }
 
 
@@ -76,7 +105,7 @@ public class Player : MonoBehaviour
         if (Die == true) return;
 
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) 
-            && stateInfo.IsName("Run"))
+            && stateInfo.IsName("Cat_isrunning"))
         {
             animator.ResetTrigger("Jump");
             animator.SetTrigger("Slide");
@@ -87,13 +116,20 @@ public class Player : MonoBehaviour
 
             if (spriteTransform != null)
                 spriteTransform.localPosition = originalSpritePosition + slideSpriteOffset;
+
+            // ✅ 점프 사운드 재생
+            if (SoundManager.Instance != null && SoundManager.Instance.SlideSFX != null)
+            {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.SlideSFX);
+            }
+
         }
 
         // 슬라이드 종료
         if ((Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift)) && isSliding)
         {
             animator.ResetTrigger("Slide");
-            animator.Play("Run");
+            animator.Play("Cat_isrunning");
             isSliding = false;
 
             boxCollider.size = originalColliderSize;
@@ -111,11 +147,28 @@ public class Player : MonoBehaviour
             animator.ResetTrigger("Slide");
             animator.SetTrigger("Jump");
 
-            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            transform.position += new Vector3(0, jumpHeightOffset, 0);
+            jumpCount++;
 
             isGrounded = false;
+
+            // ✅ 슬라이딩 상태 강제 해제
+            if (isSliding)
+            {
+                isSliding = false;
+                boxCollider.size = originalColliderSize;
+                boxCollider.offset = originalColliderOffset;
+
+                if (spriteTransform != null)
+                    spriteTransform.localPosition = originalSpritePosition;
+            }
+
+            // ✅ 점프 사운드 재생
+            if (SoundManager.Instance != null && SoundManager.Instance.jumpSFX != null)
+            {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.jumpSFX);
+            }
+
 
             if (isSliding)
             {
@@ -144,6 +197,7 @@ public class Player : MonoBehaviour
         {
             currentHealth -= (int)healthDrainRate;
             healthTimer = 0f;
+            UpdateHPUI();
 
             Debug.Log($"현재 체력: {currentHealth}");
 
@@ -159,7 +213,7 @@ public class Player : MonoBehaviour
             return;
 
         Vector3 velocity = rb2d.velocity;     //      가속도
-        velocity.x = forwardSpeed;      //       똑같은 속도
+        velocity.x = currentSpeed;      //       똑같은 속도
 
         rb2d.velocity = velocity;
 
@@ -172,16 +226,125 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             animator.speed = 1f;
-            animator.Play("Run");
+
+            animator.ResetTrigger("Jump");
+            animator.ResetTrigger("Slide");
+            animator.Play("Cat_isrunning");
+
+            isSliding = false;
+
+            boxCollider.size = originalColliderSize;
+            boxCollider.offset = originalColliderOffset;
+            if (spriteTransform != null)
+                spriteTransform.localPosition = originalSpritePosition;
         }
     }
 
-    // 게임 오버 처리
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Obstacle>() != null && !isInvincible)  // 장애물 컴포넌트를 가진 오브젝트와 충돌하고 무적상태가 아닐때
+        {
+            Player health = GetComponent<Player>();
+            if (health != null)
+            {
+                health.TakeDamage(10); // 체력 감소 수치는 조절 가능
+                StartCoroutine(ObstacleCoroutine()); // 무적 상태 코루틴 시작
+            }
+        }
+    }
+
+    private IEnumerator ObstacleCoroutine()
+    {
+        isInvincible = true; // 무적 상태로 설정
+        yield return new WaitForSeconds(isInvincibleTime); // 일정 시간(여기서는 3초) 동안 대기
+        isInvincible = false; // 무적 상태 해제
+    }
+
+
+    // 츄르를 먹었을 때 실행되는 함수
+    public void ActivateChuruBuff(float duration)
+    {
+        StartCoroutine(ChuruBuffCoroutine(duration));   // 코루틴을 통해 일정 시간 동안 버프 효과를 주기
+    }
+
+    // 코루틴을 사용하여 츄르 버프 적용
+    private IEnumerator ChuruBuffCoroutine(float duration)
+    {
+        isInvincible = true;                 // 무적 상태로 설정
+        currentSpeed = boostedSpeed;         // 속도를 증가시킴
+
+        yield return new WaitForSeconds(duration);   // 일정 시간(여기서는 3초) 동안 대기
+
+        isInvincible = false;                // 무적 상태 해제
+        currentSpeed = normalSpeed;          // 속도를 원래대로 되돌림
+    }
+
+    // 외부에서 무적 상태를 확인할 수 있도록 반환
+    public bool IsInvincible()
+    {
+        return isInvincible;
+    }
+
+    //체력감소 함수
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHPUI();
+    }
+
+    //체력회복 함수
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHPUI();
+    }
+
+    // 체력 UI 업데이트 함수
+    private void UpdateHPUI()
+    {
+        if (hpSlider != null)
+        {
+            hpSlider.value = currentHealth;
+        }
+    }
+
+    // 속도 증가 코루틴
+    IEnumerator SpeedUpOverTime()
+    {
+        while (true) // 무한 루프
+        {
+            yield return new WaitForSeconds(timetospeedUp);  //10초 기다림
+            normalSpeed += speedUpAmount; // 속도 증가
+
+            if (!isInvincible) // 무적 상태가 아닐 때만 속도 증가
+            {
+                currentSpeed = normalSpeed; // 현재 속도를 기본 속도로 설정
+            }
+        }
+    }
+
+
+
+
     void Dead()
     {
         Debug.Log("체력 없음");
         animator.SetBool("Dead", true);
         Die = true;
-        //  이제 이곳에 캐릭터 사망시 GameOver UI 등을 넣으시면 됩니다
+
+        StartCoroutine(DeathSequence());
     }
+
+    private IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(1f); // 사망 애니메이션 대기
+        if (FadeManager.Instance != null)
+            FadeManager.Instance.FadeToScene("GameOver");
+        else
+            SceneManager.LoadScene("GameOver"); // 예외 처리
+    }
+
 }
