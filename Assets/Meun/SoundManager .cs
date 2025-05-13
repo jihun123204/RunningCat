@@ -6,17 +6,12 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     [Header("SFX")]
-    public AudioClip playerHitSFX;
-
-    [Header("Gameplay SFX")]
-    public AudioClip jumpSFX;
-    public AudioClip scoreSFX;
-    public AudioClip SlideSFX;
+    public AudioClip playerHitSFX; // ✅ 공통 플레이어 피격음
+    public AudioClip enemyHitSFX;  // ✅ 공통 적 피격음
 
     [Header("BGM")]
     public AudioClip fieldBGM;
     public AudioClip miniGameBGM;
-    public AudioClip gameOverBGM; // ✅ 게임오버 BGM
 
     public AudioSource sfxSource;
     public AudioSource bgmSource;
@@ -43,7 +38,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         if (currentScene == "MainScene" && mainSceneBGM != null)
         {
             PlayBGM(mainSceneBGM);
@@ -66,12 +61,11 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "GameOver" && gameOverBGM != null)
+        Debug.Log("🎵 씬 로드됨: " + scene.name);
+
+        if (scene.name == "MainScene" && mainSceneBGM != null)
         {
-            PlayBGM(gameOverBGM, true); // ✅ 무조건 덮어쓰기
-        }
-        else if (scene.name == "MainScene" && mainSceneBGM != null)
-        {
+            Debug.Log("🎵 메인씬 BGM 재생 시작");
             PlayBGM(mainSceneBGM);
         }
     }
@@ -82,9 +76,9 @@ public class SoundManager : MonoBehaviour
             sfxSource.PlayOneShot(clip);
     }
 
-    public void PlayBGM(AudioClip clip, bool forcePlay = false)
+    public void PlayBGM(AudioClip clip)
     {
-        if (clip != null && (forcePlay || bgmSource.clip != clip))
+        if (clip != null && bgmSource.clip != clip)
         {
             bgmSource.clip = clip;
             bgmSource.Play();
@@ -96,29 +90,32 @@ public class SoundManager : MonoBehaviour
         bgmSource.Stop();
     }
 
-    public void SetMasterVolume(float value)
-    {
-        AudioListener.volume = Mathf.Clamp01(value);
-        Debug.Log($"🎚️ 마스터 볼륨 설정: {AudioListener.volume}");
-    }
+  
+public void SetMasterVolume(float value)
+{
+    AudioListener.volume = Mathf.Clamp01(value);
+    Debug.Log($"🎚️ 마스터 볼륨 설정: {AudioListener.volume}");
+}
 
-    public void SetBGMVolume(float value)
-    {
-        if (bgmSource != null)
-        {
-            bgmSource.volume = Mathf.Clamp01(value);
-            Debug.Log($"🎼 BGM 볼륨 설정: {bgmSource.volume}");
-        }
-    }
 
-    public void SetSFXVolume(float value)
+public void SetBGMVolume(float value)
+{
+    if (bgmSource != null)
     {
-        if (sfxSource != null)
-        {
-            sfxSource.volume = Mathf.Clamp01(value);
-            Debug.Log($"🎯 SFX 볼륨 설정: {sfxSource.volume}");
-        }
+        bgmSource.volume = Mathf.Clamp01(value);
+        Debug.Log($"🎼 BGM 볼륨 설정: {bgmSource.volume}");
     }
+}
+
+
+public void SetSFXVolume(float value)
+{
+    if (sfxSource != null)
+    {
+        sfxSource.volume = Mathf.Clamp01(value);
+        Debug.Log($"🎯 SFX 볼륨 설정: {sfxSource.volume}");
+    }
+}
 
     public void PlayAreaBGM(AudioClip areaClip)
     {
@@ -128,4 +125,6 @@ public class SoundManager : MonoBehaviour
             bgmSource.Play();
         }
     }
+
+
 }
