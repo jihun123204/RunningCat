@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8993353527506317356}
   - component: {fileID: 383611384827334260}
   - component: {fileID: 4722041992139618234}
+  - component: {fileID: 577348422584823833}
   m_Layer: 0
   m_Name: obstacle_CatPot
   m_TagString: Untagged
@@ -130,7 +131,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.32078385}
+  m_Offset: {x: 0.04079342, y: -0.32078385}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -141,5 +142,17 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.6363637, y: 1.9402504}
+  m_Size: {x: 1.8933582, y: 1.9402504}
   m_EdgeRadius: 0
+--- !u!114 &577348422584823833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6234454508403060202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0af50065cc55204583f00245b2b654d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
