@@ -10,8 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5393549204386461412}
   - component: {fileID: 682090274726386667}
+<<<<<<< HEAD
   - component: {fileID: -8029425485710095974}
   - component: {fileID: -57297447453138074}
+=======
+>>>>>>> origin/Khs_Branch
   m_Layer: 0
   m_Name: obstacle_SpeedSign 1
   m_TagString: Untagged
@@ -86,6 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!114 &-8029425485710095974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +147,5 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.683358, y: 1.5599838}
   m_EdgeRadius: 0
+=======
+>>>>>>> origin/Khs_Branch

@@ -10,8 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3337294587672376714}
   - component: {fileID: 6883320985652667488}
+<<<<<<< HEAD
   - component: {fileID: 6123118309563972718}
   - component: {fileID: 6810969232786813257}
+=======
+>>>>>>> origin/Khs_Branch
   m_Layer: 0
   m_Name: obstacle_RoadSign
   m_TagString: Untagged
@@ -86,6 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!114 &6123118309563972718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +147,5 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1387775, y: 6.579239}
   m_EdgeRadius: 0
+=======
+>>>>>>> origin/Khs_Branch
