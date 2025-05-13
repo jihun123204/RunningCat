@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -305,6 +306,7 @@ public class Player : MonoBehaviour
         animator.SetBool("Dead", true);
         Die = true;
         //  이제 이곳에 캐릭터 사망시 GameOver UI 등을 넣으시면 됩니다
+        StartCoroutine(DeathSequence());
     }
 
     private IEnumerator DashFlashEffect()
@@ -332,4 +334,14 @@ public class Player : MonoBehaviour
 
         sr.color = new Color(1f, 1f, 1f, 1f); // 효과 끝나면 정상 복원
     }
+
+    private IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(1f); // 사망 애니메이션 대기
+        if (FadeManager.Instance != null)
+            FadeManager.Instance.FadeToScene("GameOver");
+        else
+            SceneManager.LoadScene("GameOver"); // 예외 처리
+    }
 }
+
