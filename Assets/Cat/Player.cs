@@ -45,6 +45,16 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
+    [Header("부스트 이펙트")]
+    public GameObject boostEffectPrefab;
+    private GameObject boostEffectInstance;
+
+    [Header("질주 잔상 이펙트")]
+    public GameObject boostTrailPrefab;
+    private GameObject boostTrailInstance;
+
+
+
     public Slider hpSlider;  // 체력바 UI
 
     public int healthDrainRate = 10;      //      초당 ?씩 체력 까이는 코드
@@ -262,23 +272,63 @@ public class Player : MonoBehaviour
     }
 
 
-    // 츄르를 먹었을 때 실행되는 함수
     public void ActivateChuruBuff(float duration)
     {
-        StartCoroutine(ChuruBuffCoroutine(duration));   // 코루틴을 통해 일정 시간 동안 버프 효과를 주기
+        StartCoroutine(ChuruBuffCoroutine(duration));
     }
 
-    // 코루틴을 사용하여 츄르 버프 적용
     private IEnumerator ChuruBuffCoroutine(float duration)
     {
-        isInvincible = true;                 // 무적 상태로 설정
-        currentSpeed = boostedSpeed;         // 속도를 증가시킴
+        isInvincible = true;
+        currentSpeed = boostedSpeed;
 
-        yield return new WaitForSeconds(duration);   // 일정 시간(여기서는 3초) 동안 대기
+        if (animator != null)
+        {
+            animator.SetBool("IsBoosting", true);
+        }
 
-        isInvincible = false;                // 무적 상태 해제
-        currentSpeed = normalSpeed;          // 속도를 원래대로 되돌림
+        // ✅ 부스트 이펙트 (불꽃)
+        if (boostEffectPrefab != null && boostEffectInstance == null)
+        {
+            boostEffectInstance = Instantiate(boostEffectPrefab, transform.position, Quaternion.identity);
+            boostEffectInstance.transform.SetParent(transform);
+            boostEffectInstance.transform.localPosition = new Vector3(-0.5f, 0f, 0f);
+        }
+
+        // ✅ 질주 잔상 TrailRenderer 프리팹 생성
+        if (boostTrailPrefab != null && boostTrailInstance == null)
+        {
+            boostTrailInstance = Instantiate(boostTrailPrefab, transform.position, Quaternion.identity);
+            boostTrailInstance.transform.SetParent(transform);
+            boostTrailInstance.transform.localPosition = Vector3.zero;
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        isInvincible = false;
+        currentSpeed = normalSpeed;
+
+        if (animator != null)
+        {
+            animator.SetBool("IsBoosting", false);
+        }
+
+        // ✅ 이펙트 제거
+        if (boostEffectInstance != null)
+        {
+            Destroy(boostEffectInstance);
+            boostEffectInstance = null;
+        }
+
+        // ✅ TrailRenderer 제거
+        if (boostTrailInstance != null)
+        {
+            Destroy(boostTrailInstance);
+            boostTrailInstance = null;
+        }
     }
+
+
 
     // 외부에서 무적 상태를 확인할 수 있도록 반환
     public bool IsInvincible()
