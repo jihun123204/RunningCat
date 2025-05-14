@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
         // 점프
         if (Die == true) return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount)
         {
             animator.ResetTrigger("Slide");
             animator.SetTrigger("Jump");
@@ -241,6 +241,8 @@ public class Player : MonoBehaviour
             animator.ResetTrigger("Slide");
             animator.Play("Cat_isrunning");
 
+            jumpCount = 0;      //      바닥에 착지할 때 마다 "점프 횟수 초기화" 로 2단점프 지속 가능
+
             isSliding = false;
 
             boxCollider.size = originalColliderSize;
@@ -258,6 +260,7 @@ public class Player : MonoBehaviour
             Player health = GetComponent<Player>();
             if (health != null)
             {
+                animator.SetTrigger("Hit");
                 health.TakeDamage(10); // 체력 감소 수치는 조절 가능
                 StartCoroutine(ObstacleCoroutine()); // 무적 상태 코루틴 시작
             }
@@ -302,6 +305,8 @@ public class Player : MonoBehaviour
             boostTrailInstance.transform.SetParent(transform);
             boostTrailInstance.transform.localPosition = Vector3.zero;
         }
+
+        StartCoroutine(DashFlashEffect());
 
         yield return new WaitForSeconds(duration);
 
@@ -376,6 +381,31 @@ public class Player : MonoBehaviour
         }
     }
 
+ private IEnumerator DashFlashEffect()
+    {
+        if (spriteTransform == null)
+            yield break;
+
+        SpriteRenderer sr = spriteTransform.GetComponent<SpriteRenderer>();
+        if (sr == null)
+            yield break;
+
+        float flashInterval = 0.1f;    // 반짝이는 간격
+        float elapsed = 0f;
+
+        while (elapsed < isInvincibleTime)
+        {
+            sr.color = new Color(1f, 1f, 1f, 0.5f); // 반투명하게
+            yield return new WaitForSeconds(flashInterval);
+
+            sr.color = new Color(1f, 1f, 1f, 1f);   // 원래 색상
+            yield return new WaitForSeconds(flashInterval);
+
+            elapsed += flashInterval * 2;
+        }
+
+        sr.color = new Color(1f, 1f, 1f, 1f); // 효과 끝나면 정상 복원
+    }
 
 
 

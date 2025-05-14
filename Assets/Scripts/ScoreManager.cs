@@ -7,47 +7,55 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    [SerializeField] private int score = 0;  //????????
-    [SerializeField] private TextMeshProUGUI scoreText;  // ???????? UI
+    [SerializeField] private int score = 0;  // 현재 점수
+    [SerializeField] private int highScore = 0;  // 최고 점수
 
+    [Header("🟡 점수 UI")]
+    [SerializeField] private TextMeshProUGUI scoreText;      // 현재 점수 텍스트
+    [SerializeField] private TextMeshProUGUI highScoreText;  // 최고 점수 텍스트
 
     private void Awake()
     {
-        // ?????? ????
         if (Instance == null)
         {
-            Instance = this;   //?????????? ????????
+            Instance = this;
+            // DontDestroyOnLoad(gameObject); // 필요한 경우 유지
         }
         else
         {
-            Destroy(gameObject); //?????????? ?????? ???????? ????
+            Destroy(gameObject);
             return;
         }
-        // (????) ?? ???? ?? ???????? ????
-        // DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        UpdateScoreUI();  //???????? ???? UI ????
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        UpdateScoreUI();
     }
 
     public void AddScore(int amount)
     {
-        score += amount;    //???? ????
-        UpdateScoreUI();    // ???? UI ????
+        score += amount;
 
-        // ? ?? ?? ??? ??
-        if (SoundManager.Instance != null && SoundManager.Instance.scoreSFX != null)
+        if (score > highScore)
         {
-            SoundManager.Instance.PlaySFX(SoundManager.Instance.scoreSFX);
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore); // 최고 점수 저장
         }
 
+        PlayerPrefs.SetInt("CurrentScore", score); // ✅ 게임오버 씬 전달용 현재 점수 저장
+
+        UpdateScoreUI();
     }
 
-    private void UpdateScoreUI()
+
+    public void UpdateScoreUI()
     {
-        scoreText.text = "Score: " + score;    //?????? ????
-    }
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
 
+        if (highScoreText != null)
+            highScoreText.text = "High Score: " + highScore;
+    }
 }
