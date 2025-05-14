@@ -7,53 +7,55 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    [SerializeField] private int score = 0;  //��������
-    [SerializeField] private int highScore = 0;  // �ְ� ����
+    [SerializeField] private int score = 0;  // 현재 점수
+    [SerializeField] private int highScore = 0;  // 최고 점수
 
-    [SerializeField] private TextMeshProUGUI scoreText;  // ������� UI
-    [SerializeField] private TextMeshProUGUI highScoreText;  // �ְ� ���� ��� UI
-
+    [Header("🟡 점수 UI")]
+    [SerializeField] private TextMeshProUGUI scoreText;      // 현재 점수 텍스트
+    [SerializeField] private TextMeshProUGUI highScoreText;  // 최고 점수 텍스트
 
     private void Awake()
     {
-        // �̱��� ����
         if (Instance == null)
         {
-            Instance = this;   //ó�������� �ν��Ͻ�
+            Instance = this;
+            // DontDestroyOnLoad(gameObject); // 필요한 경우 유지
         }
         else
         {
-            Destroy(gameObject); //�ν��Ͻ��� �ִٸ� �ڱ��ڽ� ����
+            Destroy(gameObject);
             return;
         }
-        // (�ɼ�) �� ��ȯ �� �����ϴ� �ڵ�
-        // DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        highScore = PlayerPrefs.GetInt("HighScore", 0);  // ����� �ְ� ���� �ҷ�����
-        UpdateScoreUI();  //�����Ҷ� ���� UI �ݿ�
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        UpdateScoreUI();
     }
 
     public void AddScore(int amount)
     {
-        score += amount;    //���� ����
+        score += amount;
 
-        // �ְ� ���� ���� Ȯ��
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetInt("HighScore", highScore);  // �ְ� ���� ����
+            PlayerPrefs.SetInt("HighScore", highScore); // 최고 점수 저장
         }
 
-        UpdateScoreUI();    // ���� UI �ݿ�
+        PlayerPrefs.SetInt("CurrentScore", score); // ✅ 게임오버 씬 전달용 현재 점수 저장
+
+        UpdateScoreUI();
     }
 
-    private void UpdateScoreUI()
+
+    public void UpdateScoreUI()
     {
-        scoreText.text = "Score: " + score;    //�ؽ�Ʈ ǥ��
-        highScoreText.text = "High Score: " + highScore;
-    }
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
 
+        if (highScoreText != null)
+            highScoreText.text = "High Score: " + highScore;
+    }
 }
