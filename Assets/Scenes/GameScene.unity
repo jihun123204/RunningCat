@@ -32139,6 +32139,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2094693247224139742, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094693247224139742, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094693247224139742, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 2109278787015249336, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_SizeDelta.x
       value: 473.5406
@@ -32149,11 +32161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2109278787015249336, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 430
+      value: 754
       objectReference: {fileID: 0}
     - target: {fileID: 2109278787015249336, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 269
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 2476631311819024487, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_IsActive
@@ -32177,7 +32189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7451657904670107770, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7451657904670107770, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_fontAsset
@@ -32185,7 +32197,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
     - target: {fileID: 7451657904670107770, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_fontSizeBase
-      value: 50
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7451657904670107770, guid: 40cebe49c877a43dca75dd9d7ceec096, type: 3}
       propertyPath: m_sharedMaterial
